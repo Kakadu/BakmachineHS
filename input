@@ -1,0 +1,4 @@
+int 10
+mov ah,bh
+mov 5,ah
+nop

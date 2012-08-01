@@ -1,0 +1,11 @@
+module Main where 
+-- compiler of bytecode
+
+import Text.Parsec
+import AsmParser
+
+main = 
+  do
+    putStrLn "Hallo world from compiler"
+    
+    

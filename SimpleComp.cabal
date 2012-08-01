@@ -1,0 +1,25 @@
+name: SimpleComp
+version: 0.0.1
+cabal-version: >=1.10
+build-type: Simple
+license: AllRightsReserved
+license-file: ""
+synopsis: compiler and virtual machine for a simple language
+description:  
+data-dir: ""
+ 
+executable SimpleComp
+    build-depends: QuickCheck -any, base -any, parsec -any
+    main-is: Main.hs
+    buildable: True
+    other-modules: Types, AsmParser
+    hs-source-dirs: src, compiler
+    default-extensions:  FlexibleContexts
+
+executable Interpret
+    build-depends: QuickCheck -any, base -any
+    main-is: Main.hs
+    buildable: True
+    other-modules: Types
+    hs-source-dirs: src, interpret
+
