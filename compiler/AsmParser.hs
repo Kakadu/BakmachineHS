@@ -7,6 +7,7 @@ module AsmParser (
 import Text.Parsec
 import Text.Parsec.String
 import Types
+import Data.Word
 
 register :: Stream s m Char => ParsecT s () m RegisterSort
 register =
@@ -19,14 +20,14 @@ inter =
     string "int"
     spaces
     digits <- many1 digit
-    let i = read digits :: Int
+    let i = read digits :: Word8
     case  Types.inter_of_int i of
       Just x  -> return $ Interrupt x
       Nothing -> fail "no such interrupt"
       
-int :: Stream s m Char => ParsecT s () m Int      
+int :: Stream s m Char => ParsecT s () m Word8
 int = do lst <- many1 digit
-         return $ (read lst :: Int)
+         return $ (read lst :: Word8)
          
 noop :: Stream s m Char => ParsecT s () m Bytecmd
 noop = string "nop" >> (return Nop)

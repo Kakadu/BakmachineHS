@@ -7,6 +7,8 @@ module Types (
   code_of_inter
 ) where
 
+import Data.Word
+
 -- types for bytecode commands
 data RegisterSort = AH | BH | CH | DH | EH | SP deriving (Show)
 
@@ -15,13 +17,13 @@ data InterruptSort =
   | IOutInt deriving (Show)
 
 data Bytecmd =
-    Mov1 Int RegisterSort 
+    Mov1 Word8 RegisterSort 
   | Mov2 RegisterSort RegisterSort
   | Nop
   | Interrupt InterruptSort
   deriving (Show)
 
-code_of_reg :: RegisterSort -> Int
+code_of_reg :: RegisterSort -> Word8
 code_of_reg x = case x of
   AH -> 0 
   BH -> 1
@@ -34,6 +36,6 @@ inter_of_int 10 = Just IExit
 inter_of_int 11 = Just IOutInt
 inter_of_int __ = Nothing
   
-code_of_inter :: InterruptSort -> Int                  
+code_of_inter :: InterruptSort -> Word8
 code_of_inter IExit = 10
 code_of_inter IOutInt = 13

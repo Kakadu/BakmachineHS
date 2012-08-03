@@ -3,8 +3,9 @@ module GenByte (
 ) where
 
 import Types
+import Data.Word
 
-gen_cmd :: Bytecmd -> [Int]
+gen_cmd :: Bytecmd -> [Word8]
 gen_cmd cmd = 
   case cmd of 
     Mov2 x r -> [1, code_of_reg x, code_of_reg r]
@@ -12,6 +13,6 @@ gen_cmd cmd =
     Nop      -> [19]
     Interrupt i -> [20, code_of_inter i]
 
-gen_program :: [Bytecmd] -> [Int]
+gen_program :: [Bytecmd] -> [Word8]
 gen_program = concatMap gen_cmd
 
