@@ -9,7 +9,7 @@ description:
 data-dir: ""
  
 executable SimpleComp
-    build-depends: QuickCheck -any, base -any, parsec -any, binary -any, bytestring -any
+    build-depends: QuickCheck -any, base -any, parsec -any, binary -any, bytestring -any, containers -any
     main-is: Main.hs
     buildable: True
     other-modules: AsmTypes, GenByte, AsmParser

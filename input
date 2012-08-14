@@ -9,4 +9,4 @@ mul dh
 cmp bh dh
 jg label1
 int 11
-int 10 
+int 10

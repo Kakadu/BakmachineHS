@@ -1,11 +1,4 @@
-module AsmTypes (
-  RegisterSort (AH,BH,CH,DH,EH),
-  InterruptSort (IExit, IInputInt, IOutInt),
-  Bytecmd (Nop, Interrupt, Mov1, Mov2, Cmp2),
-  inter_of_int,
-  code_of_reg,
-  code_of_inter
-) where
+module AsmTypes where
 
 import Data.Word
 
@@ -17,12 +10,19 @@ data InterruptSort =
   | IInputInt
   | IOutInt deriving (Show)
 
-data Bytecmd =
-    Mov1 Word8 RegisterSort 
+data Statement =
+    Add1 Word8 RegisterSort 
+  | Add2 RegisterSort RegisterSort
+  | Mov1 Word8 RegisterSort 
   | Mov2 RegisterSort RegisterSort
+  | Mul RegisterSort 
   | Nop
   | Cmp2 RegisterSort RegisterSort
   | Interrupt InterruptSort
+  | Label String
+  | JumpGreater String
+  | JumpEq      String
+  | JumpLess    String
   deriving (Show)
 
 code_of_reg :: RegisterSort -> Word8
