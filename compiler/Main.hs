@@ -4,18 +4,15 @@ module Main where
 import Text.Parsec
 import AsmParser
 import qualified GenByte
+import qualified Numeric
 
 import Data.Binary.Put
---import Data.ByteString.Lazy
+import Data.ByteString as ByteString hiding (putStrLn,  readFile, putStr, map)
+import Data.Word
 
---serializeProgram :: [Int] -> Put
---serializeProgram xs = 
-  
---  where loop acc [] = acc
---        loop acc x:xs = 
---          case x of
-            
-
+serializeProgram :: [Word8] -> IO ()
+serializeProgram xs = 
+  ByteString.writeFile "out.byte" $ Prelude.foldl ByteString.snoc ByteString.empty xs
 
 main = 
   do
@@ -30,6 +27,7 @@ main =
         do 
           putStrLn ("right: " ++ show result)
           let ints = GenByte.gen_program result 
-          putStrLn ("bytes: " ++ show ints)
+          putStrLn ("bytes: " ++ (show $ map (\x -> Numeric.showHex x "") ints ) )
+          serializeProgram ints
     
     
