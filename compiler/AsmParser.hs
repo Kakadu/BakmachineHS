@@ -6,7 +6,7 @@ module AsmParser (
 import Debug.Trace
 import Text.Parsec
 import Text.Parsec.String
-import Types
+import AsmTypes
 import Data.Word
 
 register :: Stream s m Char => ParsecT s () m RegisterSort
@@ -21,7 +21,7 @@ inter =
     spaces
     digits <- (many1 digit) <?> "need some digits"
     let i = trace (show digits) (read digits :: Word8)
-    case Types.inter_of_int i of
+    case inter_of_int i of
       Just x  -> return (trace (show ans) ans )
                  where ans = Interrupt x
       Nothing -> fail "no such interrupt"

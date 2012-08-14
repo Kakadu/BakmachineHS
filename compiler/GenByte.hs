@@ -2,7 +2,7 @@ module GenByte (
   gen_program
 ) where
 
-import Types
+import AsmTypes
 import Data.Word
 
 gen_cmd :: Bytecmd -> [Word8]
