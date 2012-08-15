@@ -9,7 +9,7 @@ description:
 data-dir: ""
  
 executable SimpleComp
-    build-depends: QuickCheck -any, base -any, parsec -any, binary -any, bytestring -any, containers -any
+    build-depends: base, parsec, binary, bytestring, containers 
     main-is: Main.hs
     buildable: True
     other-modules: AsmTypes, GenByte, AsmParser
@@ -18,7 +18,7 @@ executable SimpleComp
 
 executable Interpret
     default-language: Haskell2010
-    build-depends: QuickCheck -any, base -any, binary -any
+    build-depends: base, parsec, binary, bytestring, containers
     main-is: Main.hs
     buildable: True
     other-modules: Types

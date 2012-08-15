@@ -1,11 +1,4 @@
-module Types (
-  RegisterSort (AH,BH,CH,DH,EH),
-  InterruptSort (IExit, IInputInt, IOutInt),
-  Bytecmd (Nop, Interrupt, Mov1, Mov2, Cmp2),
-  inter_of_int,
-  code_of_reg,
-  code_of_inter
-) where
+module Types where
 
 import Data.Word
 
@@ -20,8 +13,16 @@ data InterruptSort =
 data Bytecmd =
     Mov1 Word8 RegisterSort 
   | Mov2 RegisterSort RegisterSort
-  | Nop
+  | Add1 RegisterSort RegisterSort
+  | Sub1 RegisterSort RegisterSort
+  | Add2 Word8 RegisterSort 
+  | Mul RegisterSort
+  | Cmp1 Word8 RegisterSort
   | Cmp2 RegisterSort RegisterSort
+  | Nop
+  | JumpGreater Word8
+  | JumpEq      Word8
+  | JumpLess    Word8
   | Interrupt InterruptSort
   deriving (Show)
 
@@ -34,6 +35,15 @@ code_of_reg x = case x of
   EH -> 4
   SP -> 5
 
+reg_of_code 0 = AH  
+reg_of_code 1 = BH
+reg_of_code 2 = CH  
+reg_of_code 3 = DH  
+reg_of_code 4 = EH  
+reg_of_code 5 = SP  
+reg_of_code _ = error "Bad register code"
+
+  
 inter_of_int 10 = Just IExit
 inter_of_int 11 = Just IOutInt
 inter_of_int 13 = Just IInputInt
