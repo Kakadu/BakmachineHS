@@ -43,3 +43,18 @@ code_of_inter :: InterruptSort -> Word8
 code_of_inter IExit = 10
 code_of_inter IOutInt = 11
 code_of_inter IInputInt = 13
+
+lengther x =
+  case x of
+    Add1 _ _ -> 3
+    Add2 _ _ -> 3
+    Mov1 _ _ -> 3
+    Mov2 _ _ -> 3
+    Mul _ -> 2
+    Nop -> 1
+    Cmp2 _ _ -> 3
+    Interrupt _ -> 2
+    Label _ -> 0
+    JumpGreater _ -> 2
+    JumpEq      _ -> 2
+    JumpLess    _ -> 2
