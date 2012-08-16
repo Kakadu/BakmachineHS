@@ -2,7 +2,7 @@ module GenByte where
 
 import AsmTypes
 import Data.Word
-import qualified Data.Map.Lazy as Map
+import qualified Data.Map as Map
 
 gen_program :: [Statement] -> [Word8]
 gen_program xs = 

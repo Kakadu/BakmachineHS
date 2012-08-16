@@ -26,6 +26,22 @@ data Bytecmd =
   | Interrupt InterruptSort
   deriving (Show)
 
+instr_length :: Bytecmd -> Int
+instr_length cmd = case cmd of
+  Mov1 _ _ -> 3
+  Mov2 _ _ -> 3
+  Add1 _ _ -> 3
+  Add2 _ _ -> 3
+  Sub1 _ _ -> 3
+  Mul   _  -> 2  
+  Cmp1 _ _ -> 3
+  Cmp2 _ _ -> 3
+  Nop -> 1
+  JumpGreater _ -> 2
+  JumpLess _ -> 2
+  JumpEq   _ -> 2
+  Interrupt _ -> 2
+  
 code_of_reg :: RegisterSort -> Word8
 code_of_reg x = case x of
   AH -> 0 
@@ -35,6 +51,7 @@ code_of_reg x = case x of
   EH -> 4
   SP -> 5
 
+reg_of_code :: Word8 -> RegisterSort
 reg_of_code 0 = AH  
 reg_of_code 1 = BH
 reg_of_code 2 = CH  
