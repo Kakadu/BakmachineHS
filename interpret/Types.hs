@@ -1,5 +1,6 @@
 module Types where
 
+import Data.Int
 import Data.Word
 
 -- types for bytecode commands
@@ -11,22 +12,22 @@ data InterruptSort =
   | IOutInt deriving (Show)
 
 data Bytecmd =
-    Mov1 Word8 RegisterSort 
+    Mov1 Int16 RegisterSort 
   | Mov2 RegisterSort RegisterSort
   | Add1 RegisterSort RegisterSort
   | Sub1 RegisterSort RegisterSort
-  | Add2 Word8 RegisterSort 
+  | Add2 Int16 RegisterSort 
   | Mul RegisterSort
-  | Cmp1 Word8 RegisterSort
+  | Cmp1 Int16 RegisterSort
   | Cmp2 RegisterSort RegisterSort
   | Nop
-  | JumpGreater Word8
-  | JumpEq      Word8
-  | JumpLess    Word8
+  | JumpGreater Int16
+  | JumpEq      Int16
+  | JumpLess    Int16
   | Interrupt InterruptSort
   deriving (Show)
 
-instr_length :: Bytecmd -> Int
+instr_length :: Bytecmd -> Int16
 instr_length cmd = case cmd of
   Mov1 _ _ -> 3
   Mov2 _ _ -> 3
@@ -42,7 +43,7 @@ instr_length cmd = case cmd of
   JumpEq   _ -> 2
   Interrupt _ -> 2
   
-code_of_reg :: RegisterSort -> Word8
+code_of_reg :: RegisterSort -> Int16
 code_of_reg x = case x of
   AH -> 0 
   BH -> 1
@@ -66,7 +67,7 @@ inter_of_int 11 = Just IOutInt
 inter_of_int 13 = Just IInputInt
 inter_of_int __ = Nothing
   
-code_of_inter :: InterruptSort -> Word8
+code_of_inter :: InterruptSort -> Int16
 code_of_inter IExit = 10
 code_of_inter IOutInt = 11
 code_of_inter IInputInt = 13
